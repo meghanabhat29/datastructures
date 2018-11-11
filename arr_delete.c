@@ -22,8 +22,6 @@
           {
               if(del<pos)
               {
-                  
-              
               for(i=0;i<=del;i++)
               {
                  a[del]=a[i+1];
