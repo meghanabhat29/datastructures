@@ -1,17 +1,29 @@
-#include<stdio.h>
-int gcd(int m,int n)
+#include <stdio.h>
+ 
+int gcd(int, int);
+ 
+int main()
 {
-    int rem=m/n;
-    if(rem==0)
-    return(n);
-    else
-    return(gcd(n,rem));
+    int a, b, result;
+ 
+    printf("Enter the two numbers : ");
+    scanf("%d %d", &a, &b);
+    result = gcd(a, b);
+    printf("The GCD of %d and %d is %d.\n", a, b, result);
 }
-void main()
+ 
+int gcd(int a, int b)
 {
-    int n1,n2,res;
-    printf("Enter 2 numbers : ");
-    scanf("%d %d",&n1,&n2);
-    res=gcd(n1,n2);
-    printf("The greatest commom divisor of %d and %d is %d",n1,n2,res);
+    while (a != b)
+    {
+        if (a > b)
+        {
+            return gcd(a - b, b);
+        }
+        else
+        {
+            return gcd(a, b - a);
+        }
+    }
+    return a;
 }
