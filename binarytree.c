@@ -31,7 +31,7 @@ int is_rchild(struct node *tree)
 void create(struct node *tree)
 {
     struct node *temp;
-    if(is_child(tree))
+    if(is_lchild(tree))
     {
         tree->lchild=(struct node *)malloc(sizeof(struct node));
         temp=tree->lchild;
