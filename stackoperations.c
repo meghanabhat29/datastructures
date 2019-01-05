@@ -18,7 +18,7 @@ void pop(int *s,int *top)
     else
     {
         int ditem=s[*top];
-        printf("%d is deleted from the stack.",ditem);
+        printf("%d is now deleted from the stack.",ditem);
         (*top)--;
     }
 }
