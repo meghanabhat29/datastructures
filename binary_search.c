@@ -4,7 +4,7 @@
 void main()
 {
     int a[10],m=0,item,l,u,flag=0;
-    printf("Enter : ");
+    printf("Enter the elements in the ascending order : ");
     for(int i=0;i<10;i++)
     {
         scanf("%d",&a[i]);
