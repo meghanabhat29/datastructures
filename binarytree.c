@@ -91,10 +91,10 @@ void main()
     printf("Enter the data : ");
     scanf("%d",&root->data);
     create(root);
-    printf("The inorder traversal is \n");
+    printf("The inorder traversal is : ");
     inorder(root);
-    printf("The postorder traversal is\n");
+    printf("\nThe postorder traversal is : ");
     postorder(root);
-    printf("The preorder traversal is\n");
+    printf("\nThe preorder traversal is : ");
     preorder(root);
 }
