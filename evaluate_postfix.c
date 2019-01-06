@@ -44,19 +44,19 @@ void main()
                 case '^':r=pow(op1,op2);
                 push(r);
                 break;
-                case '/':r=op2/op1;
+                case '/':r=op1/op2;
                 push(r);
                 break;
-                case '*':r=op2*op1;
+                case '*':r=op1*op2;
                 push(r);
                 break;
-                case '+':r=op2-op1;
+                case '+':r=op1-op2;
                 push(r);
                 break;
-                case '-':r=op2-op1;
+                case '-':r=op1-op2;
                 push(r);
                 break;
-                case '%':r=op2%op1;
+                case '%':r=op1%op2;
                 push(r);
                 break;
             }
