@@ -1,0 +1,112 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node
+{
+    char data;
+    struct node *lchild;
+    struct node *rchild;
+};
+int top=-1;
+struct node *stack[20];
+struct node *tree;
+void push(struct node *tree)
+{
+    stack[++top]=tree;
+}
+struct node *pop()
+{
+    return stack[top--];
+}
+int check(char ch)
+{
+    if(ch=='+'||ch=='-'||ch=='*'||ch=='/')
+    {
+        return 2;
+    }
+    else
+    {
+        return 1;
+    }
+}
+int calculate(struct node *tree)
+{
+    int ch;
+    ch=check(tree->data);
+    if(ch==1)
+    {
+        return tree->data-48;
+    }
+    else if(ch==2)
+    {
+      if(tree->data=='+')
+      {
+          return calculate(tree->lchild)+calculate(tree->rchild);
+      }
+      else if(tree->data=='-')
+      {
+          return calculate(tree->lchild)-calculate(tree->rchild);
+      }
+      else if(tree->data=='*')
+      {
+          return calculate(tree->lchild)*calculate(tree->rchild);
+      }
+      else
+      {
+          return calculate(tree->lchild)/calculate(tree->rchild);
+      }
+    }
+    else
+    {
+        return 0;
+    }
+}
+void inorder(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+    inorder(tree->lchild);
+    printf("%c",tree->data);
+    inorder(tree->rchild);
+    }
+}
+void operators(char a)
+{
+    tree=(struct node*)malloc(sizeof(struct node));
+    tree->data=a;
+    tree->lchild=pop();
+    tree->rchild=pop();
+    push(tree);
+}
+void operand(char b)
+{
+    tree=(struct node*)malloc(sizeof(struct node));
+    tree->data=b;
+    tree->lchild=NULL;
+    tree->rchild=NULL;
+    push(tree);
+}
+int main()
+{
+    int i,op,r;
+    char postfix[30];
+    printf("Enter the postfix expression : ");
+    fflush(stdin);
+    scanf("%s",postfix);
+    for(i=0;postfix[i]!='\0';i++)
+    {
+        op=check(postfix[i]);
+        if(op==1)
+        {
+            operand(postfix[i]);
+        }
+        else if(op==2)
+        {
+            operators(postfix[i]);
+        }
+    }
+    r=calculate(stack[top]);
+    printf("The result is : %d",r);
+    printf("\nThe infix form of the expression is :");
+    inorder(stack[top]);
+}
