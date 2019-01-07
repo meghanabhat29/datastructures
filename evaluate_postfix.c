@@ -1,37 +1,28 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<math.h>
-#define size 30
-int s[size],top=-1,m;
-int is_operand(char item)
+#include<ctype.h>
+int top=-1;
+int stack[30];
+void push(int item)
 {
-    if(item>='A'&&item<='Z'||item>='a'&&item<='z')
-    return 1;
-    else
-    return 0;
-}
-void push(int m)
-{
-    s[++top]=m;
+    stack[++top]=item;
 }
 int pop()
 {
-    int ditem=s[top];
-    top--;
-    return ditem;
+    return stack[top--];
 }
 void main()
 {
     char postfix[30],item;
-    int i=0,op1,op2,r;
+    int i=0,m,op1,op2,res;
     printf("Enter the postfix expression : ");
     scanf("%s",postfix);
     while(postfix[i]!='\0')
     {
         item=postfix[i];
-        if(is_operand(item)==1)
+        if(isalnum(item))
         {
-            printf("Enter the value for %c : ",item);
+            printf("Enter the value for %c",item);
             scanf("%d",&m);
             push(m);
         }
@@ -41,28 +32,27 @@ void main()
             op1=pop();
             switch(item)
             {
-                case '^':r=pow(op1,op2);
-                push(r);
+                case '*':res=op1*op2;
+                push(res);
                 break;
-                case '/':r=op1/op2;
-                push(r);
+                case '/':res=op1/op2;
+                push(res);
                 break;
-                case '*':r=op1*op2;
-                push(r);
+                case '+':
+                res=op1+op2;
+                push(res);
                 break;
-                case '+':r=op1-op2;
-                push(r);
+                case '-':
+                res=op1-op2;
+                push(res);
                 break;
-                case '-':r=op1-op2;
-                push(r);
-                break;
-                case '%':r=op1%op2;
-                push(r);
+                case '^':
+                res=pow(op2,op1);
+                push(res);
                 break;
             }
         }
         i++;
     }
-    r=pop();
-    printf("The result of the expression is %d",r);
+    printf("The result is %d",res);
 }
