@@ -131,7 +131,7 @@ void delete_loc()
     else if(pos>1&&pos<count)
     {
         ptr=head;
-        while(ptr!=NULL)
+       for(int i=1;i<pos;i++)
         {
             temp=ptr;
             ptr=ptr->link;
